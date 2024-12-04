@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 style="color: brown;">Admin Dashboard</h2>
+            </div>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="showSection('users')"><i class="fas fa-users"></i> Users</a></li>
+                <li><a href="javascript:void(0)" onclick="showSection('roles')"><i class="fas fa-cogs"></i> Roles</a></li>
+                <li><a href="javascript:void(0)" onclick="showSection('permissions')"><i class="fas fa-lock"></i> Permissions</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content-container">
+            <header>
+                <h1>User Role Management</h1>
+                
+                <button class="add-user-btn" onclick="user">Add User</button>
+            </header>
+
+            <!-- Users Section -->
+            <section id="users" class="section">
+                <h2>User Management</h2>
+                <input type="text" id="search-users" placeholder="Search users..." onkeyup="searchUsers()">
+                <table id="user-table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- User data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Roles Section -->
+            <section id="roles" class="section">
+                <h2>Role Management</h2>
+                <input type="text" id="search-roles" placeholder="Search roles..." onkeyup="searchRoles()">
+                <table id="role-table">
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                            <th>Permissions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Role data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Permissions Section -->
+            <section id="permissions" class="section">
+                <h2>Permission Management</h2>
+                <p>Manage the permissions for various roles here.</p>
+            </section>
+        </main>
+    </div>
+
+
+    
+    <!-- Add User Modal -->
+    <div id="edit-user-modal" class="modal">
+        <div class="modal-content">
+            <h3>Edit User</h3>
+            <form id="edit-user-form">
+                <label for="edit-username">Username:</label>
+                <input type="text" id="edit-username" required>
+                <label for="edit-role">Role:</label>
+                <select id="edit-role" required>
+                    <!-- Roles will be populated dynamically here -->
+                </select>
+                <button type="button" onclick="updateUser()">Save Changes</button>
+                <button type="button" class="close-modal" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RBAC Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgba(227, 106, 227, 0.668);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+      display: none;
+      margin-top: 10px;
+    }
+
+    .role-message {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required><br>
+      <input type="password" id="password" placeholder="Password" required><br>
+      <button type="submit">Login</button>
+    </form>
+    <p id="errorMessage" class="error">Invalid username or password!</p>
+    <p id="roleMessage" class="role-message"></p> <!-- Role message display -->
+  </div>
+
+  <script>
+    // Define hardcoded username, password, and roles
+    const users = {
+      "shiva23": { password: "shiva23", role: "Owner" },
+      "editor123": { password: "editor123", role: "Editor" }
+    };
+
+    // Listen for form submission
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Check if username exists
+      if (users[username] && users[username].password === password) {
+        const userRole = users[username].role;
+
+        // Display role message
+        document.getElementById("roleMessage").textContent = `Welcome ${username}! You are logged in as an ${userRole}.`;
+
+        // Redirect to the appropriate page based on role
+        if (userRole === "Owner") {
+          alert("Welcome Owner!");
+          window.location.href = "index.html"; // Example redirection for Owner
+        } else if (userRole === "Editor") {
+          alert("Welcome Editor!");
+          window.location.href = "editor_dashboard.html"; // Example redirection for Editor
+        }
+      } else {
+        document.getElementById("errorMessage").style.display = "block";
+        document.getElementById("roleMessage").textContent = "";
+      }
+    });
+  </script>
+
+</body>
+</html>
